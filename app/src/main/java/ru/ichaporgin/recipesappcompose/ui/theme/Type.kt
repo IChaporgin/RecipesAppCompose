@@ -36,10 +36,12 @@ val Typography = Typography(
 val recipesAppTypography = Typography(
     displayLarge = TextStyle(
         fontFamily = montserratAlternatesFontFamily,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 20.sp
     ),
     titleMedium = TextStyle(
         fontFamily = montserratAlternatesFontFamily,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 16.sp
     ),
     bodyMedium = TextStyle(
