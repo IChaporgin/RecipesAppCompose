@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,7 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ru.ichaporgin.recipesappcompose.ui.theme.RecipesAppComposeTheme
+import ru.ichaporgin.recipesappcompose.ui.theme.RecipesAppTheme
 import ru.ichaporgin.recipesappcompose.ui.theme.recipesAppTypography
 
 class MainActivity : ComponentActivity() {
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            RecipesAppComposeTheme {
+            RecipesAppTheme {
                 Scaffold(
                    content = {padding: PaddingValues ->
                        Box (
@@ -39,6 +40,7 @@ class MainActivity : ComponentActivity() {
                                verticalArrangement = Arrangement.spacedBy(16.dp),
                            ) {
                                TestTypography()
+                               ThemeTestScreen()
                            }
                        }
                    }
@@ -52,30 +54,63 @@ class MainActivity : ComponentActivity() {
 fun TestTypography() {
     Text(
         text = "Display Large",
-        style = recipesAppTypography.displayLarge
+        style = recipesAppTypography.displayLarge,
+        color = MaterialTheme.colorScheme.primary
     )
     Text(
         text = "Title Medium",
-        style = recipesAppTypography.titleMedium
+        style = recipesAppTypography.titleMedium,
+        color = MaterialTheme.colorScheme.secondary
     )
     Text(
         text = "Body Medium",
-        style = recipesAppTypography.bodyMedium
+        style = recipesAppTypography.bodyMedium,
+        color = MaterialTheme.colorScheme.tertiary
     )
     Text(
         text = "Body Small",
-        style = recipesAppTypography.bodySmall
+        style = recipesAppTypography.bodySmall,
+        color = MaterialTheme.colorScheme.background
     )
     Text(
         text = "Label Large",
-        style = recipesAppTypography.labelLarge
+        style = recipesAppTypography.labelLarge,
+        color = MaterialTheme.colorScheme.primary
     )
 }
 
-@Preview(showBackground = true)
+@Composable
+fun ThemeTestScreen() {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        TestTypography()
+
+        Text(
+            text = "Primary color",
+            color = MaterialTheme.colorScheme.primary
+        )
+        Text(
+            text = "Secondary color",
+            color = MaterialTheme.colorScheme.secondary
+        )
+        Text(
+            text = "Tertiary color",
+            color = MaterialTheme.colorScheme.tertiary
+        )
+        Text(
+            text = "Background color",
+            color = MaterialTheme.colorScheme.background
+        )
+    }
+}
+
+@Preview(showBackground = true,
+    showSystemUi = true,
+    backgroundColor = 0xFF000000)
 @Composable
 fun GreetingPreview() {
-    RecipesAppComposeTheme {
+    RecipesAppTheme(darkTheme = false) {
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
@@ -84,6 +119,7 @@ fun GreetingPreview() {
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 TestTypography()
+                ThemeTestScreen()
             }
         }
     }
