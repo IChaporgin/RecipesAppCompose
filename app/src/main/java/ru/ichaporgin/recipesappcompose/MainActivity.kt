@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,24 +28,28 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             RecipesAppTheme {
-                Scaffold(
-                   content = {padding: PaddingValues ->
-                       Box (
-                           modifier = Modifier
-                               .fillMaxSize(),
-                           contentAlignment = Alignment.Center
-                       ) {
-                           Column(Modifier
-                               .padding(padding)
-                               .padding(16.dp),
-                               verticalArrangement = Arrangement.spacedBy(16.dp),
-                           ) {
-                               TestTypography()
-                               ThemeTestScreen()
-                           }
-                       }
-                   }
-                )
+                Scaffold { padding: PaddingValues ->
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Column(
+                                Modifier
+                                    .padding(padding)
+                                    .padding(16.dp),
+                                verticalArrangement = Arrangement.spacedBy(16.dp),
+                            ) {
+                                TestTypography()
+                                ThemeTestScreen()
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -105,9 +110,11 @@ fun ThemeTestScreen() {
     }
 }
 
-@Preview(showBackground = true,
+@Preview(
+    showBackground = true,
     showSystemUi = true,
-    backgroundColor = 0xFF000000)
+    backgroundColor = 0xFF000000
+)
 @Composable
 fun GreetingPreview() {
     RecipesAppTheme(darkTheme = false) {
