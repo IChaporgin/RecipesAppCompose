@@ -34,29 +34,29 @@ private val LightColorScheme = lightColorScheme(
 )
 
 private val RecipesAppLightColorScheme = lightColorScheme(
-    primary = LightCategoryButtonBackground,
+    primary = PrimaryColor,
     onPrimary = Color.White,
-    secondary = LightFavoriteButtonBackground,
+    secondary = AccentColor,
     onSecondary = Color.White,
-    tertiary = LightLabelColor,
+    tertiary = AccentBlue,
     onTertiary = Color.White,
-    background = LightBackgroundColor,
-    onBackground = LightLabelColor,
-    surface = Color.White,
-    onSurface = LightCardDescriptionColor,
+    background = BackgroundColor,
+    onBackground = TextPrimaryColor,
+    surface = SurfaceColor,
+    onSurface = TextSecondaryColor,
 )
 
 private val RecipesAppDarkColorScheme = darkColorScheme(
-    primary = DarkCategoryButtonBackground,
-    onPrimary = Color.White,
-    secondary = DarkFavoriteButtonBackground,
-    onSecondary = Color.White,
-    tertiary = DarkLabelColor,
+    primary = PrimaryColorDark,
+    onPrimary = TextPrimaryColorDark,
+    secondary = AccentColorDark,
+    onSecondary = TextSecondaryColorDark,
+    tertiary = AccentBlueDark,
     onTertiary = Color.White,
-    background = DarkBackgroundColor,
-    onBackground = DarkLabelColor,
-    surface = Color.White,
-    onSurface = DarkCardDescriptionColor,
+    background = BackgroundColorDark,
+    onBackground = TextPrimaryColor,
+    surface = SurfaceColorDark,
+    onSurface = TextSecondaryColorDark,
 )
 
 @Composable
