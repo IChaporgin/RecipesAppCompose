@@ -12,10 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import ru.ichaporgin.recipesappcompose.ui.theme.RecipesAppTheme
 import ru.ichaporgin.recipesappcompose.ui.theme.recipesAppTypography
 
 @Composable
 fun RecipesApp(){
+    RecipesAppTheme {
         Scaffold { padding: PaddingValues ->
             Surface(
                 modifier = Modifier.fillMaxSize(),
@@ -37,6 +39,7 @@ fun RecipesApp(){
                 }
             }
         }
+    }
 }
 
 @Composable

@@ -7,7 +7,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import ru.ichaporgin.recipesappcompose.ui.theme.RecipesAppTheme
 
 
 class MainActivity : ComponentActivity() {
@@ -15,9 +14,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            RecipesAppTheme {
-                RecipesApp()
-            }
+            RecipesApp()
         }
     }
 }
@@ -28,7 +25,5 @@ class MainActivity : ComponentActivity() {
 )
 @Composable
 fun GreetingPreview() {
-    RecipesAppTheme(darkTheme = true, dynamicColor = false) {
-        RecipesApp()
-    }
+    RecipesApp()
 }
