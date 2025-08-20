@@ -11,9 +11,9 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 // Основные цвета
-val PrimaryColor = Color(0xFF5F3678) // Фиолетовый для кнопок категорий
+val PrimaryColor = Color(0xFF525DC0) // Фиолетовый для кнопок категорий
 val AccentColor = Color(0xFFE13E3E) // Красный для избранного
-val AccentBlue = Color(0xFF525DC0) // Голубой для полосы прогресса порций
+val AccentBlue = Color(0xFF5F3678) // Голубой для полосы прогресса порций
 
 // Слайдер
 val SliderTrackColor = Color(0xFFA1A9F9) // Светло-голубой для дорожки слайдера
