@@ -7,18 +7,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import ru.ichaporgin.recipesappcompose.R
+import ru.ichaporgin.recipesappcompose.ui.ScreenHeader
 
 @Composable
 fun Categories(){
+    val categoriesTitle = "Категории"
+    val categoriesImage = R.drawable.bcg_categories
     Box(modifier = Modifier
         .fillMaxSize()
         .background(MaterialTheme.colorScheme.background),
-        contentAlignment = Alignment.Center
         ) {
-        Text(
-            text = "Categories",
-            color = MaterialTheme.colorScheme.primary
-        )
+        ScreenHeader(categoriesTitle,
+            categoriesImage,)
     }
 }
 
