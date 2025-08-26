@@ -1,4 +1,4 @@
-package ru.ichaporgin.recipesappcompose.ui.theme
+package ru.ichaporgin.recipesappcompose.core.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

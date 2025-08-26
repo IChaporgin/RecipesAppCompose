@@ -1,4 +1,7 @@
+import android.R.attr.onClick
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,11 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.ichaporgin.recipesappcompose.R
-import ru.ichaporgin.recipesappcompose.ui.ScreenHeader
-import ru.ichaporgin.recipesappcompose.ui.categories.CategoryItem
+import ru.ichaporgin.recipesappcompose.core.ui.ScreenHeader
+import ru.ichaporgin.recipesappcompose.core.ui.categories.CategoryItem
 
 @Composable
-fun Categories() {
+fun CategoriesScreen(
+    onCategoryItemClick: () -> Unit
+) {
     val categoriesTitle = "Категории"
     val categoriesImage = R.drawable.bcg_categories
     val categoryItemTitle = "Бургеры"
@@ -27,7 +32,7 @@ fun Categories() {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.background),
+                .background(MaterialTheme.colorScheme.background)
         ) {
             ScreenHeader(
                 categoriesTitle,
@@ -38,11 +43,11 @@ fun Categories() {
             columns = GridCells.Fixed(2),
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(16.dp),
-            horizontalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(16.dp),
-            verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(16.dp)
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             items(10) {
-                CategoryItem(categoryItemTitle, categoryItemDescription, categoryItemImage)
+                CategoryItem(categoryItemTitle, categoryItemDescription, categoryItemImage, onClick = onCategoryItemClick)
             }
         }
     }
@@ -53,6 +58,6 @@ fun Categories() {
     showSystemUi = true,
 )
 @Composable
-fun CategoriesPreview() {
-    Categories()
+fun CategoriesScreenPreview() {
+    CategoriesScreen(onCategoryItemClick = {})
 }
