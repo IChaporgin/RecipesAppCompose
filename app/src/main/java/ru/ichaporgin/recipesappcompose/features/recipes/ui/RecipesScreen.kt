@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import ru.ichaporgin.recipesappcompose.R
 import ru.ichaporgin.recipesappcompose.core.ui.ScreenHeader
+import ru.ichaporgin.recipesappcompose.core.ui.theme.recipesAppTypography
 
 val title = "Рецепты"
 val image = R.drawable.burger
@@ -31,7 +32,8 @@ fun RecipesScreen(){
             .fillMaxSize(),
             contentAlignment = Alignment.Center) {
             Text("Скоро здесь будет список рецептов",
-                style = MaterialTheme.typography.titleLarge)
+                style = recipesAppTypography.bodyLarge,
+                color = MaterialTheme.colorScheme.tertiary)
         }
     }
 }
