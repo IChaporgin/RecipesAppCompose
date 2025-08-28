@@ -10,7 +10,7 @@ import ru.ichaporgin.recipesappcompose.core.ui.ScreenHeader
 
 @Composable
 fun FavoriteScreen(){
-    val favoriteTitle = "Избранное"
+    val favoriteTitle = R.string.favorites_title
     val favoriteImage = R.drawable.bcg_favorites
     Box(
         modifier = Modifier

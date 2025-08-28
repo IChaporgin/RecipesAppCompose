@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RecipesAppCompose</string>
+    <string name="favorites_title">Избранное</string>
+    <string name="recipes_title">Рецепты</string>
 </resources>

@@ -21,8 +21,10 @@ import ru.ichaporgin.recipesappcompose.R
 import ru.ichaporgin.recipesappcompose.core.ui.theme.recipesAppTypography
 
 @Composable
-fun ScreenHeader(title: String,
-                 image: Int) {
+fun ScreenHeader(
+    title: Int,
+    image: Int
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()

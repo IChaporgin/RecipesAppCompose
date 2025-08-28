@@ -15,7 +15,7 @@ import ru.ichaporgin.recipesappcompose.R
 import ru.ichaporgin.recipesappcompose.core.ui.ScreenHeader
 import ru.ichaporgin.recipesappcompose.core.ui.theme.recipesAppTypography
 
-val title = "Рецепты"
+val title = R.string.recipes_title
 val image = R.drawable.burger
 
 @Composable
