@@ -1,4 +1,4 @@
-package ru.ichaporgin.recipesappcompose.ui.theme
+package ru.ichaporgin.recipesappcompose.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

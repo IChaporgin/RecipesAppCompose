@@ -10,7 +10,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import ru.ichaporgin.recipesappcompose.ScreenId
-import ru.ichaporgin.recipesappcompose.ui.theme.RecipesAppTheme
+import ru.ichaporgin.recipesappcompose.core.ui.theme.RecipesAppTheme
+import ru.ichaporgin.recipesappcompose.features.recipes.ui.RecipesScreen
 
 @Composable
 fun RecipesApp() {
@@ -31,8 +32,9 @@ fun RecipesApp() {
                     .padding(paddingValues)
             ) {
                 when (currentScreen) {
-                    ScreenId.CATEGORY -> Categories()
-                    ScreenId.FAVORITE -> Favorite()
+                    ScreenId.CATEGORY -> CategoriesScreen(onCategoryItemClick  = { currentScreen = ScreenId.RECIPES })
+                    ScreenId.FAVORITE -> FavoriteScreen()
+                    ScreenId.RECIPES -> RecipesScreen()
                     else -> {}
                 }
             }

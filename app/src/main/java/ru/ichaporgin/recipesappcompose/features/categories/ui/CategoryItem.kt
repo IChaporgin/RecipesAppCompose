@@ -1,7 +1,8 @@
-package ru.ichaporgin.recipesappcompose.ui.categories
+package ru.ichaporgin.recipesappcompose.core.ui.categories
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,18 +20,22 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.ichaporgin.recipesappcompose.R
-import ru.ichaporgin.recipesappcompose.ui.theme.recipesAppTypography
+import ru.ichaporgin.recipesappcompose.core.ui.theme.recipesAppTypography
 
 @Composable
-fun CategoryItem(title: String,
-                 description: String,
-                 image: Int) {
+fun CategoryItem(
+    title: String,
+    description: String,
+    image: Int,
+    onClick: () -> Unit
+) {
     Box(
         modifier = Modifier
             .width(156.dp)
             .height(220.dp)
             .clip(RoundedCornerShape(8.dp))
             .background(MaterialTheme.colorScheme.surface)
+            .clickable { onClick() },
     ) {
         Column {
             Image(
@@ -69,6 +74,7 @@ fun CategoryItemPreview() {
     CategoryItem(
         title = "Бургеры",
         description = "Рецепты всех популярных бургеров",
-        image = R.drawable.burger
+        image = R.drawable.burger,
+        onClick = {}
     )
 }

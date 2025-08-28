@@ -6,10 +6,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import ru.ichaporgin.recipesappcompose.R
-import ru.ichaporgin.recipesappcompose.ui.ScreenHeader
+import ru.ichaporgin.recipesappcompose.core.ui.ScreenHeader
 
 @Composable
-fun Favorite(){
+fun FavoriteScreen(){
     val favoriteTitle = "Избранное"
     val favoriteImage = R.drawable.bcg_favorites
     Box(
@@ -27,5 +27,5 @@ fun Favorite(){
 )
 @Composable
 fun FavoritePreview(){
-    Favorite()
+    FavoriteScreen()
 }

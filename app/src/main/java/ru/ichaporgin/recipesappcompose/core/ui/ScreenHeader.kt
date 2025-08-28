@@ -1,4 +1,4 @@
-package ru.ichaporgin.recipesappcompose.ui
+package ru.ichaporgin.recipesappcompose.core.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -18,7 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.ichaporgin.recipesappcompose.R
-import ru.ichaporgin.recipesappcompose.ui.theme.recipesAppTypography
+import ru.ichaporgin.recipesappcompose.core.ui.theme.recipesAppTypography
 
 @Composable
 fun ScreenHeader(title: String,
