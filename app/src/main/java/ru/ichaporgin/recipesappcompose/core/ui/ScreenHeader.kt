@@ -14,15 +14,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.annotation.StringRes
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.ichaporgin.recipesappcompose.R
 import ru.ichaporgin.recipesappcompose.core.ui.theme.recipesAppTypography
+import ru.ichaporgin.recipesappcompose.features.recipes.ui.title
 
 @Composable
 fun ScreenHeader(
-    title: Int,
+    title: String,
     image: Int
 ) {
     Box(
@@ -46,7 +49,6 @@ fun ScreenHeader(
         ) {
             Text(
                 text = title.uppercase(),
-
                 style = recipesAppTypography.displayLarge,
                 modifier = Modifier
                     .padding(all = 10.dp),
@@ -62,5 +64,5 @@ fun ScreenHeader(
 )
 @Composable
 fun ScreenHeaderPreview() {
-    ScreenHeader(title = "Категории", image = R.drawable.bcg_categories)
+    ScreenHeader(title = "Категории".uppercase(), image = R.drawable.bcg_categories)
 }

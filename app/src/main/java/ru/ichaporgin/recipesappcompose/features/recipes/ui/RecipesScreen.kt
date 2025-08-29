@@ -1,5 +1,6 @@
 package ru.ichaporgin.recipesappcompose.features.recipes.ui
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,12 +11,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import ru.ichaporgin.recipesappcompose.R
 import ru.ichaporgin.recipesappcompose.core.ui.ScreenHeader
 import ru.ichaporgin.recipesappcompose.core.ui.theme.recipesAppTypography
 
-val title = R.string.recipes_title
+@StringRes val title = R.string.recipes_title
 val image = R.drawable.burger
 
 @Composable
@@ -26,7 +28,7 @@ fun RecipesScreen(){
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.background)
         ) {
-            ScreenHeader(title, image)
+            ScreenHeader(stringResource(title).uppercase(), image)
         }
         Box(modifier = Modifier
             .fillMaxSize(),
