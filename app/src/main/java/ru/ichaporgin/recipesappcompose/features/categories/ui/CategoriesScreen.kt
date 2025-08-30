@@ -1,3 +1,4 @@
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,6 +11,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.ichaporgin.recipesappcompose.R
@@ -20,7 +22,7 @@ import ru.ichaporgin.recipesappcompose.core.ui.categories.CategoryItem
 fun CategoriesScreen(
     onCategoryItemClick: () -> Unit
 ) {
-    val categoriesTitle = "Категории"
+    @StringRes val categoriesTitle = R.string.category_title
     val categoriesImage = R.drawable.bcg_categories
     val categoryItemTitle = "Бургеры"
     val categoryItemDescription = "Рецепты всех популярных бургеров"
@@ -33,7 +35,7 @@ fun CategoriesScreen(
                 .background(MaterialTheme.colorScheme.background)
         ) {
             ScreenHeader(
-                categoriesTitle,
+                stringResource(categoriesTitle).uppercase(),
                 categoriesImage,
             )
         }

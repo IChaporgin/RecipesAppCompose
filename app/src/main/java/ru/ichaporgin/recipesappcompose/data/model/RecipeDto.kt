@@ -1,0 +1,10 @@
+package ru.ichaporgin.recipesappcompose.data.model
+
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class RecipeDto(
+    val id: Int,
+    val title: String,
+    val ingredients: List<IngredientDto>
+)
