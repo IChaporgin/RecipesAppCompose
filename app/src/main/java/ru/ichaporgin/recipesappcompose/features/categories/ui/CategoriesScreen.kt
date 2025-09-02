@@ -1,3 +1,4 @@
+import android.content.Context
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -10,13 +11,19 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import ru.ichaporgin.recipesappcompose.R
 import ru.ichaporgin.recipesappcompose.core.ui.ScreenHeader
 import ru.ichaporgin.recipesappcompose.core.ui.categories.CategoryItem
+import ru.ichaporgin.recipesappcompose.data.model.CategoryDto
+import ru.ichaporgin.recipesappcompose.data.repository.RecipesRepositoryStub
 
 @Composable
 fun CategoriesScreen(
@@ -47,7 +54,10 @@ fun CategoriesScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             items(10) {
-                CategoryItem(categoryItemTitle, categoryItemDescription, categoryItemImage, onClick = onCategoryItemClick)
+                CategoryItem(categoryItemTitle,
+                    categoryItemDescription,
+                    categoryItemImage,
+                    onClick = onCategoryItemClick)
             }
         }
     }
