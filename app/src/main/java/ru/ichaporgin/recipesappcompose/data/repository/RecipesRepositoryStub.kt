@@ -2,7 +2,6 @@ package ru.ichaporgin.recipesappcompose.data.repository
 
 import android.content.Context
 import kotlinx.serialization.builtins.ListSerializer
-import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
 import ru.ichaporgin.recipesappcompose.data.model.CategoryDto
 import ru.ichaporgin.recipesappcompose.data.model.RecipeDto
