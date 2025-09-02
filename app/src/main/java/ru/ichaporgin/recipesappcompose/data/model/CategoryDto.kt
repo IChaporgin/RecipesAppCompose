@@ -7,5 +7,5 @@ data class CategoryDto(
     val id: Int,
     val title: String,
     val description: String,
-    val image: String,
+    val imageUrl: String,
 )

@@ -1,4 +1,3 @@
-import android.content.Context
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -11,29 +10,26 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import ru.ichaporgin.recipesappcompose.R
 import ru.ichaporgin.recipesappcompose.core.ui.ScreenHeader
 import ru.ichaporgin.recipesappcompose.core.ui.categories.CategoryItem
-import ru.ichaporgin.recipesappcompose.data.model.CategoryDto
 import ru.ichaporgin.recipesappcompose.data.repository.RecipesRepositoryStub
 
 @Composable
 fun CategoriesScreen(
-    onCategoryItemClick: () -> Unit
+    onCategoryItemClick: () -> Unit,
 ) {
+    val context = LocalContext.current
+    val repository = RecipesRepositoryStub(context)
     @StringRes val categoriesTitle = R.string.category_title
     val categoriesImage = R.drawable.bcg_categories
-    val categoryItemTitle = "Бургеры"
-    val categoryItemDescription = "Рецепты всех популярных бургеров"
     val categoryItemImage = R.drawable.burger
+    val categories = repository.getCategories()
 
     Column {
         Box(
@@ -53,12 +49,16 @@ fun CategoriesScreen(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            items(10) {
-                CategoryItem(categoryItemTitle,
-                    categoryItemDescription,
-                    categoryItemImage,
-                    onClick = onCategoryItemClick)
+            items(categories.size) { index ->
+                val category = categories[index]
+                CategoryItem(
+                    title = category.title,
+                    description = category.description,
+                    image = categoryItemImage,
+                    onClick = onCategoryItemClick
+                )
             }
+
         }
     }
 }
