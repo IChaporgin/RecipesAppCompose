@@ -28,7 +28,6 @@ fun CategoriesScreen(
     val repository = RecipesRepositoryStub
     @StringRes val categoriesTitle = R.string.category_title
     val categoriesImage = R.drawable.bcg_categories
-    val categoryItemImage = R.drawable.burger
     val categories = repository.getCategories(context)
 
     Column {
