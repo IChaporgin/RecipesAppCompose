@@ -6,15 +6,14 @@ import kotlinx.serialization.json.Json
 import ru.ichaporgin.recipesappcompose.data.model.CategoryDto
 import ru.ichaporgin.recipesappcompose.data.model.RecipeDto
 
-class RecipesRepositoryStub(
-    private val context: Context
-) {
+object RecipesRepositoryStub {
     private val json = Json {
         ignoreUnknownKeys = true
     }
 
-    fun getCategories(): List<CategoryDto> {
-        return  context.assets.open("category.json").use { inputStream ->
+
+    fun getCategories(context: Context): List<CategoryDto> {
+        return context.assets.open("category.json").use { inputStream ->
             val categoryJson = inputStream
                 .bufferedReader()
                 .use { it.readText() }
@@ -22,13 +21,13 @@ class RecipesRepositoryStub(
         }
     }
 
-    fun getRecipesByCategoryId(id: Int): List<RecipeDto> {
-        val recipesJson = context.assets.open("recipe.json").use { inputStream ->
-            inputStream
-                .bufferedReader()
-                .use { it.readText() }
-        }
-        val recipes: List<RecipeDto> = json.decodeFromString(recipesJson)
-        return recipes.filter { it.id == id }
+    fun getRecipesByCategoryId(context: Context, categoryId: Int): List<RecipeDto> {
+        val recipesJson = context.assets.open("recipe.json")
+            .use { it.bufferedReader().readText() }
+        val recipes: List<RecipeDto> = json.decodeFromString(
+            ListSerializer(RecipeDto.serializer()),
+            recipesJson
+        )
+        return recipes.filter { it.id == categoryId }
     }
 }

@@ -25,11 +25,11 @@ fun CategoriesScreen(
     onCategoryItemClick: () -> Unit,
 ) {
     val context = LocalContext.current
-    val repository = RecipesRepositoryStub(context)
+    val repository = RecipesRepositoryStub
     @StringRes val categoriesTitle = R.string.category_title
     val categoriesImage = R.drawable.bcg_categories
     val categoryItemImage = R.drawable.burger
-    val categories = repository.getCategories()
+    val categories = repository.getCategories(context)
 
     Column {
         Box(
@@ -54,7 +54,7 @@ fun CategoriesScreen(
                 CategoryItem(
                     title = category.title,
                     description = category.description,
-                    image = categoryItemImage,
+                    image = category.imageUrl,
                     onClick = onCategoryItemClick
                 )
             }
