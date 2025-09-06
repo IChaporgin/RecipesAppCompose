@@ -1,5 +1,6 @@
 package ru.ichaporgin.recipesappcompose.core.ui.categories
 
+import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -13,22 +14,30 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ru.ichaporgin.recipesappcompose.R
 import ru.ichaporgin.recipesappcompose.core.ui.theme.recipesAppTypography
 
 @Composable
 fun CategoryItem(
     title: String,
     description: String,
-    image: Int,
+    image: String,
     onClick: () -> Unit
 ) {
+    val context = LocalContext.current
+    val bitmap = remember(image) {
+        context.assets.open(image).use { inputStream ->
+            BitmapFactory.decodeStream(inputStream)
+        }
+    }
+
     Box(
         modifier = Modifier
             .width(156.dp)
@@ -39,7 +48,7 @@ fun CategoryItem(
     ) {
         Column {
             Image(
-                painter = painterResource(image),
+                bitmap = bitmap.asImageBitmap(),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -74,7 +83,7 @@ fun CategoryItemPreview() {
     CategoryItem(
         title = "Бургеры",
         description = "Рецепты всех популярных бургеров",
-        image = R.drawable.burger,
+        image = "burger.png",
         onClick = {}
     )
 }
