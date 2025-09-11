@@ -9,4 +9,5 @@ data class RecipeDto(
     val ingredients: List<IngredientDto>,
     val method: List<String>,
     val imageUrl: String,
+    val categoryId: Int,
 )
