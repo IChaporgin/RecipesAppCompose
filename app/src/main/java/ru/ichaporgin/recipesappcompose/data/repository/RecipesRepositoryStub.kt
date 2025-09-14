@@ -28,6 +28,6 @@ object RecipesRepositoryStub {
             ListSerializer(RecipeDto.serializer()),
             recipesJson
         )
-        return recipes.filter { it.id == categoryId }
+        return recipes.filter { it.categoryId == categoryId }
     }
 }
