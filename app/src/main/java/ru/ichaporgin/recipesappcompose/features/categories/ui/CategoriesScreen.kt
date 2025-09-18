@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import ru.ichaporgin.recipesappcompose.R
 import ru.ichaporgin.recipesappcompose.core.ui.ScreenHeader
 import ru.ichaporgin.recipesappcompose.core.ui.categories.CategoryItem
+import ru.ichaporgin.recipesappcompose.core.ui.model.toUiModel
 import ru.ichaporgin.recipesappcompose.data.repository.RecipesRepositoryStub
 
 @Composable
@@ -29,6 +30,7 @@ fun CategoriesScreen(
     @StringRes val categoriesTitle = R.string.category_title
     val categoriesImage = R.drawable.bcg_categories
     val categories = repository.getCategories(context)
+        .map { it.toUiModel() }
 
     Column {
         Box(
@@ -54,7 +56,7 @@ fun CategoriesScreen(
                     title = category.title,
                     description = category.description,
                     image = category.imageUrl,
-                    onClick = onCategoryItemClick
+                    onCategoryItemClick
                 )
             }
 

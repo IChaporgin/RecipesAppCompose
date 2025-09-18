@@ -40,7 +40,7 @@ fun CategoryItem(
     ) {
         Column {
             AsyncImage(
-                model = Constants.ASSETS_URI_PREFIX + image,
+                model = image,
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -78,7 +78,7 @@ fun CategoryItemPreview() {
     CategoryItem(
         title = "Бургеры",
         description = "Самые сочные бургеры",
-        image = null,
+        image = "burger.png",
         onClick = {}
     )
 }
