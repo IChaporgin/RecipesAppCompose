@@ -23,12 +23,11 @@ import ru.ichaporgin.recipesappcompose.data.repository.RecipesRepositoryStub
 
 @Composable
 fun CategoriesScreen(
-    onCategoryItemClick: () -> Unit,
+    onCategoryClick: (Int, String, String) -> Unit,
 ) {
     val context = LocalContext.current
     val repository = RecipesRepositoryStub
     @StringRes val categoriesTitle = R.string.category_title
-    val categoriesImage = R.drawable.bcg_categories
     val categories = repository.getCategories(context)
         .map { it.toUiModel() }
 
@@ -40,7 +39,7 @@ fun CategoriesScreen(
         ) {
             ScreenHeader(
                 stringResource(categoriesTitle).uppercase(),
-                categoriesImage,
+                null,
             )
         }
         LazyVerticalGrid(
@@ -56,10 +55,9 @@ fun CategoriesScreen(
                     title = category.title,
                     description = category.description,
                     image = category.imageUrl,
-                    onCategoryItemClick
+                    onClick = { onCategoryClick(category.id, category.title, category.imageUrl) },
                 )
             }
-
         }
     }
 }
@@ -70,5 +68,5 @@ fun CategoriesScreen(
 )
 @Composable
 fun CategoriesScreenPreview() {
-    CategoriesScreen(onCategoryItemClick = {})
+    CategoriesScreen(onCategoryClick = {} as (Int, String, String) -> Unit)
 }
