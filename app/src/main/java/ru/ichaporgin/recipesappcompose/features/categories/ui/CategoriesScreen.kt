@@ -40,6 +40,7 @@ fun CategoriesScreen(
             ScreenHeader(
                 stringResource(categoriesTitle).uppercase(),
                 null,
+                R.drawable.bcg_categories
             )
         }
         LazyVerticalGrid(
@@ -68,5 +69,5 @@ fun CategoriesScreen(
 )
 @Composable
 fun CategoriesScreenPreview() {
-    CategoriesScreen(onCategoryClick = {} as (Int, String, String) -> Unit)
+    CategoriesScreen({ _, _, _ -> })
 }

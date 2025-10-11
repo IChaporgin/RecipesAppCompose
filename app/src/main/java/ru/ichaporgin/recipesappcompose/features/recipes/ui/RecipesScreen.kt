@@ -27,8 +27,6 @@ import ru.ichaporgin.recipesappcompose.core.ui.model.RecipeUiModel
 import ru.ichaporgin.recipesappcompose.core.ui.model.toUiModel
 import ru.ichaporgin.recipesappcompose.data.repository.RecipesRepositoryStub
 
-val image = R.drawable.burger
-
 @Composable
 fun RecipesScreen(
     categoryId: Int,
@@ -39,10 +37,11 @@ fun RecipesScreen(
     val context = LocalContext.current
     var recipes by remember { mutableStateOf<List<RecipeUiModel>>(emptyList()) }
     var isLoading by remember { mutableStateOf(false) }
+    val defaultImageRes = R.drawable.img_placeholder
     LaunchedEffect(categoryId) {
         isLoading = true
         try {
-            kotlinx.coroutines.delay(5000) // :TODO Имитация загрузки
+            kotlinx.coroutines.delay(1000)
             recipes = repository.getRecipesByCategoryId(context, categoryId)
                 .map { it.toUiModel() }
         } finally {
@@ -55,7 +54,7 @@ fun RecipesScreen(
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.background)
         ) {
-            ScreenHeader(categoryTitle.uppercase(), categoryImage)
+            ScreenHeader(categoryTitle.uppercase(), categoryImage, defaultImageRes)
         }
         Box(
             modifier = Modifier

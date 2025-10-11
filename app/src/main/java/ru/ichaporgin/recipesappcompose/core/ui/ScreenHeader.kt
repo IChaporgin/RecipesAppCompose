@@ -24,9 +24,9 @@ import ru.ichaporgin.recipesappcompose.core.ui.theme.recipesAppTypography
 @Composable
 fun ScreenHeader(
     title: String,
-    image: String?
+    image: String?,
+    defaultImageRes: Int
 ) {
-    val imageRes = R.drawable.bcg_categories
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -44,7 +44,7 @@ fun ScreenHeader(
             )
         } else {
             Image(
-                painter = painterResource(imageRes),
+                painter = painterResource(defaultImageRes),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxSize(),
@@ -75,5 +75,5 @@ fun ScreenHeader(
 )
 @Composable
 fun ScreenHeaderPreview() {
-    ScreenHeader(title = "Категории".uppercase(), image = null)
+    ScreenHeader(title = "Категории".uppercase(), image = null, defaultImageRes = R.drawable.bcg_categories)
 }

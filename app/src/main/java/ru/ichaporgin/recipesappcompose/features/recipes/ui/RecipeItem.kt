@@ -30,7 +30,7 @@ fun RecipeItem(
     modifier: Modifier = Modifier
 ){
     Card (
-        modifier = Modifier
+        modifier = modifier
             .width(344.dp)
             .height(132.dp)
             .clip(RoundedCornerShape(8.dp))
@@ -68,9 +68,9 @@ fun RecipeItemPreview(){
             recipe = RecipeUiModel(
                 id = 0,
                 title = "Чизбургер",
-                imageUrl = TODO(),
-                ingredients = TODO(),
-                method = TODO(),
+                imageUrl = "burger.png",
+                ingredients = emptyList(),
+                method = emptyList(),
                 isFavorite = false,
             ),
         onRecipeClick = {}

@@ -19,7 +19,7 @@ fun FavoriteScreen(){
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
     ) {
-        ScreenHeader(title = stringResource(id = favoriteTitle).uppercase(), image = null)
+        ScreenHeader(title = stringResource(id = favoriteTitle).uppercase(), image = null, defaultImageRes = favoriteImage)
     }
 }
 
