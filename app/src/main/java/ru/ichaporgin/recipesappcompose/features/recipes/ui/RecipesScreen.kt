@@ -1,5 +1,6 @@
 package ru.ichaporgin.recipesappcompose.features.recipes.ui
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,24 +27,40 @@ import ru.ichaporgin.recipesappcompose.core.ui.ScreenHeader
 import ru.ichaporgin.recipesappcompose.core.ui.model.RecipeUiModel
 import ru.ichaporgin.recipesappcompose.core.ui.model.toUiModel
 import ru.ichaporgin.recipesappcompose.data.repository.RecipesRepositoryStub
+import ru.ichaporgin.recipesappcompose.core.ui.model.CategoryUiModel
 
 @Composable
 fun RecipesScreen(
     categoryId: Int,
-    categoryTitle: String,
-    categoryImage: String?,
 ) {
     val repository = RecipesRepositoryStub
     val context = LocalContext.current
     var recipes by remember { mutableStateOf<List<RecipeUiModel>>(emptyList()) }
     var isLoading by remember { mutableStateOf(false) }
     val defaultImageRes = R.drawable.img_placeholder
+    var categoryTitle by remember { mutableStateOf("") }
+    var categoryImage by remember { mutableStateOf<String?>(null) }
+    
     LaunchedEffect(categoryId) {
         isLoading = true
         try {
+            Log.d("RecipesScreen", "Loading recipes for categoryId = $categoryId")
             kotlinx.coroutines.delay(1000)
+
+            val categories = repository.getCategories(context)
+                .map { it.toUiModel() }
+            val category = categories.find { it.id == categoryId }
+
+            if (category != null) {
+                categoryTitle = category.title
+                categoryImage = category.imageUrl
+            }
+
             recipes = repository.getRecipesByCategoryId(context, categoryId)
                 .map { it.toUiModel() }
+            
+            Log.d("RecipesScreen", "Found category: title=$categoryTitle, image=$categoryImage")
+            Log.d("RecipesScreen", "Found ${recipes.size} recipes")
         } finally {
             isLoading = false
         }
@@ -88,8 +105,6 @@ fun RecipesScreen(
 @Composable
 fun RecipesScreenPreview() {
     RecipesScreen(
-        categoryId = 1,
-        categoryTitle = "Бургеры",
-        categoryImage = null
+        categoryId = 0,
     )
 }
