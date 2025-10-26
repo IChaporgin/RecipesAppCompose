@@ -17,6 +17,9 @@ import ru.ichaporgin.recipesappcompose.features.recipes.ui.RecipesScreen
 fun RecipesApp() {
     RecipesAppTheme {
         var currentScreen by remember { mutableStateOf(ScreenId.CATEGORY) }
+        var selectedCategoryId by remember { mutableStateOf<Int?>(null) }
+        var selectedCategoryTitle by remember { mutableStateOf<String?>(null) }
+        var selectedCategoryImage by remember { mutableStateOf<String?>(null) }
 
         Scaffold(
             bottomBar = {
@@ -32,9 +35,21 @@ fun RecipesApp() {
                     .padding(paddingValues)
             ) {
                 when (currentScreen) {
-                    ScreenId.CATEGORY -> CategoriesScreen(onCategoryItemClick  = { currentScreen = ScreenId.RECIPES })
+                    ScreenId.CATEGORY -> CategoriesScreen(
+                        onCategoryClick  = { categoryId, categoryTitle, categoryImage ->
+                            selectedCategoryId = categoryId
+                            selectedCategoryTitle = categoryTitle
+                            selectedCategoryImage = categoryImage
+                            currentScreen = ScreenId.RECIPES
+                        }
+                    )
                     ScreenId.FAVORITE -> FavoriteScreen()
-                    ScreenId.RECIPES -> RecipesScreen()
+                    ScreenId.RECIPES -> RecipesScreen(
+                        categoryId = selectedCategoryId ?: error("Category ID is required"),
+                        categoryTitle = selectedCategoryTitle
+                            ?: error("Category title is required"),
+                        categoryImage = selectedCategoryImage ?: error("Category image is required")
+                    )
                     else -> {}
                 }
             }

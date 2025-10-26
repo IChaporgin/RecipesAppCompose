@@ -8,11 +8,13 @@ import ru.ichaporgin.recipesappcompose.data.model.CategoryDto
 data class CategoryUiModel(
     val id: Int,
     val title: String,
+    val description: String,
     val imageUrl: String,
 )
 
 fun CategoryDto.toUiModel() = CategoryUiModel(
     id = id,
     title = title,
+    description = description,
     imageUrl = Constants.ASSETS_URI_PREFIX + imageUrl
 )

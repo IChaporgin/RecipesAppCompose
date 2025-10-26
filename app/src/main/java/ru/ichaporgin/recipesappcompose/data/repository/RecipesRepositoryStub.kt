@@ -11,7 +11,6 @@ object RecipesRepositoryStub {
         ignoreUnknownKeys = true
     }
 
-
     fun getCategories(context: Context): List<CategoryDto> {
         return context.assets.open("category.json").use { inputStream ->
             val categoryJson = inputStream
@@ -21,9 +20,11 @@ object RecipesRepositoryStub {
         }
     }
 
-    fun getRecipesByCategoryId(context: Context, categoryId: Int): List<RecipeDto> {
+    fun getRecipesByCategoryId(context: Context, categoryId: Int?): List<RecipeDto> {
         val recipesJson = context.assets.open("recipe.json")
-            .use { it.bufferedReader().readText() }
+            .use { it
+                .bufferedReader()
+                .readText() }
         val recipes: List<RecipeDto> = json.decodeFromString(
             ListSerializer(RecipeDto.serializer()),
             recipesJson
