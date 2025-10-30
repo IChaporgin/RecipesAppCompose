@@ -22,16 +22,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import ru.ichaporgin.recipesappcompose.R
 import ru.ichaporgin.recipesappcompose.core.ui.ScreenHeader
 import ru.ichaporgin.recipesappcompose.core.ui.model.RecipeUiModel
 import ru.ichaporgin.recipesappcompose.core.ui.model.toUiModel
 import ru.ichaporgin.recipesappcompose.data.repository.RecipesRepositoryStub
-import ru.ichaporgin.recipesappcompose.core.ui.model.CategoryUiModel
 
 @Composable
 fun RecipesScreen(
     categoryId: Int,
+    navController: NavController
 ) {
     val repository = RecipesRepositoryStub
     val context = LocalContext.current
@@ -40,7 +41,7 @@ fun RecipesScreen(
     val defaultImageRes = R.drawable.img_placeholder
     var categoryTitle by remember { mutableStateOf("") }
     var categoryImage by remember { mutableStateOf<String?>(null) }
-    
+
     LaunchedEffect(categoryId) {
         isLoading = true
         try {
@@ -58,7 +59,7 @@ fun RecipesScreen(
 
             recipes = repository.getRecipesByCategoryId(context, categoryId)
                 .map { it.toUiModel() }
-            
+
             Log.d("RecipesScreen", "Found category: title=$categoryTitle, image=$categoryImage")
             Log.d("RecipesScreen", "Found ${recipes.size} recipes")
         } finally {
@@ -85,7 +86,11 @@ fun RecipesScreen(
                     items(recipes, key = { it.id }) { recipe ->
                         RecipeItem(
                             recipe = recipe,
-                            onRecipeClick = {},
+                            onRecipeClick = {
+                                navController.currentBackStackEntry
+                                    ?.savedStateHandle
+                                    ?.set("recipe", recipe)
+                            },
                             modifier = Modifier.padding(
                                 horizontal = 16.dp,
                                 vertical = 8.dp
@@ -105,6 +110,7 @@ fun RecipesScreen(
 @Composable
 fun RecipesScreenPreview() {
     RecipesScreen(
-        categoryId = 0,
+        categoryId = 1,
+        navController = NavController(LocalContext.current)
     )
 }

@@ -48,11 +48,11 @@ fun RecipesApp() {
                     }
                     composable(
                         Destination.Recipes.route,
-                        arguments = listOf(navArgument("categoryId") { type = NavType.IntType })
+                        arguments = listOf(navArgument("categoryId") { type = NavType.IntType }),
                     )
                     { backStackEntry ->
                         val categoryId = backStackEntry.arguments?.getInt("categoryId") ?: 0
-                        RecipesScreen(categoryId)
+                        RecipesScreen(categoryId, navController)
                     }
                 }
             }
