@@ -10,7 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import ru.ichaporgin.recipesappcompose.Destination
+import ru.ichaporgin.recipesappcompose.core.ui.navigation.Destination
 import ru.ichaporgin.recipesappcompose.core.ui.theme.RecipesAppTheme
 import ru.ichaporgin.recipesappcompose.features.recipes.ui.RecipesScreen
 

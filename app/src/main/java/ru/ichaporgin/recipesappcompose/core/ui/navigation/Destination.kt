@@ -1,4 +1,4 @@
-package ru.ichaporgin.recipesappcompose
+package ru.ichaporgin.recipesappcompose.core.ui.navigation
 
 sealed class Destination(val route: String) {
     object Category : Destination("category")
