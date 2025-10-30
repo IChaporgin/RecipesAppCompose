@@ -3,29 +3,27 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import ru.ichaporgin.recipesappcompose.ScreenId
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import ru.ichaporgin.recipesappcompose.Destination
 import ru.ichaporgin.recipesappcompose.core.ui.theme.RecipesAppTheme
 import ru.ichaporgin.recipesappcompose.features.recipes.ui.RecipesScreen
 
 @Composable
 fun RecipesApp() {
     RecipesAppTheme {
-        var currentScreen by remember { mutableStateOf(ScreenId.CATEGORY) }
-        var selectedCategoryId by remember { mutableStateOf<Int?>(null) }
-        var selectedCategoryTitle by remember { mutableStateOf<String?>(null) }
-        var selectedCategoryImage by remember { mutableStateOf<String?>(null) }
+        val navController = rememberNavController()
 
         Scaffold(
             bottomBar = {
                 BottomNavigation(
-                    onCategoriesClick = { currentScreen = ScreenId.CATEGORY },
-                    onFavoriteClick = { currentScreen = ScreenId.FAVORITE }
+                    onCategoriesClick = { navController.navigate(Destination.Category.route) },
+                    onFavoriteClick = { navController.navigate(Destination.Favorite.route) }
                 )
             }
         ) { paddingValues ->
@@ -34,23 +32,28 @@ fun RecipesApp() {
                     .fillMaxSize()
                     .padding(paddingValues)
             ) {
-                when (currentScreen) {
-                    ScreenId.CATEGORY -> CategoriesScreen(
-                        onCategoryClick  = { categoryId, categoryTitle, categoryImage ->
-                            selectedCategoryId = categoryId
-                            selectedCategoryTitle = categoryTitle
-                            selectedCategoryImage = categoryImage
-                            currentScreen = ScreenId.RECIPES
-                        }
+                NavHost(
+                    navController = navController,
+                    startDestination = Destination.Category.route
+                ) {
+                    composable(Destination.Favorite.route) { FavoriteScreen() }
+                    composable(Destination.Category.route) {
+                        CategoriesScreen(
+                            onCategoryClick = { categoryId ->
+                                navController.navigate(
+                                    Destination.Recipes.createRoute(categoryId)
+                                )
+                            }
+                        )
+                    }
+                    composable(
+                        Destination.Recipes.route,
+                        arguments = listOf(navArgument("categoryId") { type = NavType.IntType })
                     )
-                    ScreenId.FAVORITE -> FavoriteScreen()
-                    ScreenId.RECIPES -> RecipesScreen(
-                        categoryId = selectedCategoryId ?: error("Category ID is required"),
-                        categoryTitle = selectedCategoryTitle
-                            ?: error("Category title is required"),
-                        categoryImage = selectedCategoryImage ?: error("Category image is required")
-                    )
-                    else -> {}
+                    { backStackEntry ->
+                        val categoryId = backStackEntry.arguments?.getInt("categoryId") ?: 0
+                        RecipesScreen(categoryId)
+                    }
                 }
             }
         }
