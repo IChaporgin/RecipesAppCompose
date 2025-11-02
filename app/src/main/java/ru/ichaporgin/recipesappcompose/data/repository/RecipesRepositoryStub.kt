@@ -4,6 +4,7 @@ import android.content.Context
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
 import ru.ichaporgin.recipesappcompose.data.model.CategoryDto
+import ru.ichaporgin.recipesappcompose.data.model.IngredientDto
 import ru.ichaporgin.recipesappcompose.data.model.RecipeDto
 
 object RecipesRepositoryStub {
@@ -22,13 +23,24 @@ object RecipesRepositoryStub {
 
     fun getRecipesByCategoryId(context: Context, categoryId: Int?): List<RecipeDto> {
         val recipesJson = context.assets.open("recipe.json")
-            .use { it
-                .bufferedReader()
-                .readText() }
+            .use {
+                it
+                    .bufferedReader()
+                    .readText()
+            }
         val recipes: List<RecipeDto> = json.decodeFromString(
             ListSerializer(RecipeDto.serializer()),
             recipesJson
         )
         return recipes.filter { it.categoryId == categoryId }
+    }
+
+    fun getRecipeById(context: Context, recipeId: Int?): List<IngredientDto> {
+        val recipesJson = context.assets.open("recipe.json")
+            .bufferedReader()
+            .use { it.readText() }
+        val recipes = json.decodeFromString< List<RecipeDto>>(recipesJson)
+        val recipe = recipes.find { it.id == recipeId }
+        return recipe?.ingredients ?: emptyList()
     }
 }

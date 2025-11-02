@@ -12,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import ru.ichaporgin.recipesappcompose.core.ui.navigation.Destination
 import ru.ichaporgin.recipesappcompose.core.ui.theme.RecipesAppTheme
+import ru.ichaporgin.recipesappcompose.features.ingredient.ui.IngredientScreen
 import ru.ichaporgin.recipesappcompose.features.recipes.ui.RecipesScreen
 
 @Composable
@@ -53,6 +54,12 @@ fun RecipesApp() {
                     { backStackEntry ->
                         val categoryId = backStackEntry.arguments?.getInt("categoryId") ?: 0
                         RecipesScreen(categoryId, navController)
+                    }
+                    composable(
+                        Destination.Ingredients.route,
+                        arguments = listOf(navArgument("recipeId") { type = NavType.IntType })
+                    ) {
+                        IngredientScreen(navController)
                     }
                 }
             }

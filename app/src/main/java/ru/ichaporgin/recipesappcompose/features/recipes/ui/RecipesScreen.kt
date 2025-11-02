@@ -90,6 +90,7 @@ fun RecipesScreen(
                                 navController.currentBackStackEntry
                                     ?.savedStateHandle
                                     ?.set("recipe", recipe)
+                                navController.navigate("recipe")
                             },
                             modifier = Modifier.padding(
                                 horizontal = 16.dp,
