@@ -23,10 +23,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import ru.ichaporgin.recipesappcompose.Constants
 import ru.ichaporgin.recipesappcompose.R
 import ru.ichaporgin.recipesappcompose.core.ui.ScreenHeader
 import ru.ichaporgin.recipesappcompose.core.ui.model.RecipeUiModel
 import ru.ichaporgin.recipesappcompose.core.ui.model.toUiModel
+import ru.ichaporgin.recipesappcompose.core.ui.navigation.Destination
 import ru.ichaporgin.recipesappcompose.data.repository.RecipesRepositoryStub
 
 @Composable
@@ -89,8 +91,8 @@ fun RecipesScreen(
                             onRecipeClick = {
                                 navController.currentBackStackEntry
                                     ?.savedStateHandle
-                                    ?.set("recipe", recipe)
-                                navController.navigate("recipe")
+                                    ?.set(Constants.KEY_RECIPE_OBJECT, recipe)
+                                navController.navigate(Destination.RecipeDetails.createRoute(recipe.id))
                             },
                             modifier = Modifier.padding(
                                 horizontal = 16.dp,

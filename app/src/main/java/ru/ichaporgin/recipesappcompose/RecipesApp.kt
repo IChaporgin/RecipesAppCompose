@@ -10,9 +10,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import ru.ichaporgin.recipesappcompose.Constants
+import ru.ichaporgin.recipesappcompose.core.ui.model.RecipeUiModel
 import ru.ichaporgin.recipesappcompose.core.ui.navigation.Destination
 import ru.ichaporgin.recipesappcompose.core.ui.theme.RecipesAppTheme
-import ru.ichaporgin.recipesappcompose.features.ingredient.ui.IngredientScreen
+import ru.ichaporgin.recipesappcompose.features.ingredient.ui.RecipeDetailScreen
 import ru.ichaporgin.recipesappcompose.features.recipes.ui.RecipesScreen
 
 @Composable
@@ -56,10 +58,13 @@ fun RecipesApp() {
                         RecipesScreen(categoryId, navController)
                     }
                     composable(
-                        Destination.Ingredients.route,
+                        Destination.RecipeDetails.route,
                         arguments = listOf(navArgument("recipeId") { type = NavType.IntType })
                     ) {
-                        IngredientScreen(navController)
+                        val recipe = navController.previousBackStackEntry
+                            ?.savedStateHandle
+                            ?.get<RecipeUiModel>(Constants.KEY_RECIPE_OBJECT)
+                        recipe?.let { RecipeDetailScreen(it) }
                     }
                 }
             }
