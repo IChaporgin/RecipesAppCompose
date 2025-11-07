@@ -22,9 +22,11 @@ object RecipesRepositoryStub {
 
     fun getRecipesByCategoryId(context: Context, categoryId: Int?): List<RecipeDto> {
         val recipesJson = context.assets.open("recipe.json")
-            .use { it
-                .bufferedReader()
-                .readText() }
+            .use {
+                it
+                    .bufferedReader()
+                    .readText()
+            }
         val recipes: List<RecipeDto> = json.decodeFromString(
             ListSerializer(RecipeDto.serializer()),
             recipesJson
