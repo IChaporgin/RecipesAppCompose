@@ -50,7 +50,7 @@ private fun IngredientItemPreview() {
     IngredientItem(
         ingredient = IngredientUiModel(
             name = "water",
-            amount = 200.0,
+            amount = "200",
             unitOfMeasure = "ml"
         )
     )
