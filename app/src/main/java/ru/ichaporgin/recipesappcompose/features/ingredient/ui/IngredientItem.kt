@@ -28,7 +28,7 @@ fun IngredientItem(ingredient: IngredientUiModel) {
             modifier = Modifier.weight(1f)
             )
         Text(
-            ingredient.amount.toString().uppercase(),
+            ingredient.amount.uppercase(),
             style = recipesAppTypography.titleSmall,
             color = TextSecondaryColor
         )

@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
@@ -82,29 +81,6 @@ fun RecipeDetailScreen(
     }
 }
 
-
-
-@Composable
-fun IngredientsList(ingredients: List<IngredientUiModel>) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 12.dp),
-    ) {
-        ingredients.forEachIndexed { index, ingredient ->
-            IngredientItem(ingredient)
-
-            if (index < ingredients.lastIndex) {
-                HorizontalDivider(
-                    color = TextSecondaryColor.copy(alpha = 0.2f),
-                    thickness = 0.5.dp,
-                    modifier = Modifier.padding(vertical = 4.dp)
-                )
-            }
-        }
-    }
-}
-
 @Composable
 fun PortionsSlider(
     currentPortions: Int,
@@ -143,6 +119,27 @@ fun PortionsSlider(
 //            )
 //        }
     )
+}
+
+@Composable
+fun IngredientsList(ingredients: List<IngredientUiModel>) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 12.dp),
+    ) {
+        ingredients.forEachIndexed { index, ingredient ->
+            IngredientItem(ingredient)
+
+            if (index < ingredients.lastIndex) {
+                HorizontalDivider(
+                    color = TextSecondaryColor.copy(alpha = 0.2f),
+                    thickness = 0.5.dp,
+                    modifier = Modifier.padding(vertical = 4.dp)
+                )
+            }
+        }
+    }
 }
 
 @Composable
