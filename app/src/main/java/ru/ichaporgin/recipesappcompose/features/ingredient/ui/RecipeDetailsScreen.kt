@@ -1,10 +1,12 @@
 package ru.ichaporgin.recipesappcompose.features.ingredient.ui
 
 import android.util.Log
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
@@ -20,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import ru.ichaporgin.recipesappcompose.R
 import ru.ichaporgin.recipesappcompose.core.ui.ScreenHeader
@@ -85,6 +88,7 @@ fun RecipeDetailScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PortionsSlider(
     currentPortions: Int,
@@ -106,6 +110,7 @@ fun PortionsSlider(
         color = MaterialTheme.colorScheme.onSurface,
         modifier = Modifier.padding(start = 16.dp, top = 6.dp)
     )
+    val interactionSource = remember { MutableInteractionSource() }
     Slider(
         value = currentPortions.toFloat(),
         onValueChange = { onPortionsChange(it.roundToInt()) },
@@ -115,11 +120,11 @@ fun PortionsSlider(
             thumbColor = AccentBlue,
             activeTrackColor = SliderTrackColor,
         ),
-        modifier = Modifier.padding(start = 16.dp, top = 6.dp),
+        modifier = Modifier.padding(horizontal = 16.dp),
         thumb = {
             SliderDefaults.Thumb(
-                interactionSource = it,
-                thumbSize = 16.dp
+                interactionSource = interactionSource,
+                thumbSize = DpSize(8.dp, 30.dp)
             )
         }
     )
@@ -161,7 +166,7 @@ fun InstructionsList(method: List<String>) {
     ) {
         method.forEachIndexed { index, step ->
             Text(
-                step,
+                text = "${index + 1}. ${step}",
                 modifier = Modifier.padding(vertical = 4.dp),
                 style = recipesAppTypography.titleSmall,
                 color = TextSecondaryColor
@@ -196,10 +201,10 @@ private fun RecipeDetailsScreenPreview() {
             IngredientUiModel(name = "Сливки", amount = "100", "мл")
         ),
         method = listOf(
-            "1. Поставить воду для пасты.",
-            "2. Обжарить бекон до золотистой корочки.",
-            "3. Смешать со сливками и специями.",
-            "4. Добавить пасту и перемешать."
+            "Поставить воду для пасты.",
+            "Обжарить бекон до золотистой корочки.",
+            "Смешать со сливками и специями.",
+            "Добавить пасту и перемешать."
         ),
         isFavorite = false
     )
