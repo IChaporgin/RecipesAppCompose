@@ -45,23 +45,27 @@ fun RecipeDetailScreen(
     var method by remember { mutableStateOf<List<String>>(emptyList()) }
     var currentPortions by remember { mutableStateOf(recipe.serving) }
 
-    val scaledIngredients = remember(currentPortions) {
-        val multiplier = currentPortions.toDouble() / recipe.serving
-        recipe.ingredients.map { ingredient ->
-            val amountDouble = ingredient.amount.toDoubleOrNull()
-            ingredient.copy(
-                amount = if (amountDouble != null)
-                    (amountDouble * multiplier).toString()
-                else
-                    ingredient.amount
-            )
-        }
-    }
-
     recipeTitle = recipe.title
     recipeImage = recipe.imageUrl
     ingredients = recipe.ingredients
     method = recipe.method
+
+    val scaledIngredients = remember(currentPortions) {
+        val multiplier = currentPortions.toDouble() / recipe.serving
+        ingredients.map { ingredient ->
+            val amountDouble = ingredient.amount.toDoubleOrNull()
+            ingredient.copy(
+                amount = if (amountDouble != null)
+                    (amountDouble * multiplier).let {
+                        if (it % 1 == 0.0) it.toInt().toString()
+                        else
+                            "%.1f".format(it)
+                    } else {
+                    ingredient.amount
+                }
+            )
+        }
+    }
 
     LaunchedEffect(recipe) {
         isLoading = true
@@ -112,12 +116,12 @@ fun PortionsSlider(
             activeTrackColor = SliderTrackColor,
         ),
         modifier = Modifier.padding(start = 16.dp, top = 6.dp),
-//        thumb = {
-//            SliderDefaults.Thumb(
-//                interactionSource = it,
-//                thumbSize = 16.dp
-//            )
-//        }
+        thumb = {
+            SliderDefaults.Thumb(
+                interactionSource = it,
+                thumbSize = 16.dp
+            )
+        }
     )
 }
 
@@ -156,11 +160,13 @@ fun InstructionsList(method: List<String>) {
             .padding(horizontal = 16.dp)
     ) {
         method.forEachIndexed { index, step ->
-            Text(step,
+            Text(
+                step,
                 modifier = Modifier.padding(vertical = 4.dp),
                 style = recipesAppTypography.titleSmall,
-                color = TextSecondaryColor)
-            if (index < step.lastIndex) {
+                color = TextSecondaryColor
+            )
+            if (index < method.lastIndex) {
                 HorizontalDivider(
                     color = TextSecondaryColor.copy(alpha = 0.2f),
                     thickness = 0.5.dp,
