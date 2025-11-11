@@ -5,6 +5,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -70,21 +71,20 @@ fun RecipeDetailScreen(
         }
     }
 
-    LaunchedEffect(recipe) {
-        isLoading = true
-        try {
-            Log.d("RecipeDetailScreen", "Loading ingredient for recipe = ${recipe.title}")
-            kotlinx.coroutines.delay(1000)
-            Log.d("IngredientScreen", "Found recipe: title=$recipeTitle, image=$recipeImage")
-        } finally {
-            isLoading = false
+    if (isLoading) {
+        androidx.compose.material3.CircularProgressIndicator(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 50.dp)
+                .wrapContentWidth()
+        )
+    } else {
+        LazyColumn {
+            item { ScreenHeader(recipeTitle.uppercase(), recipeImage, defaultImageRes) }
+            item { PortionsSlider(currentPortions, { newValue -> currentPortions = newValue }) }
+            item { IngredientsList(scaledIngredients) }
+            item { InstructionsList(method) }
         }
-    }
-    LazyColumn {
-        item { ScreenHeader(recipeTitle.uppercase(), recipeImage, defaultImageRes) }
-        item { PortionsSlider(currentPortions, { newValue -> currentPortions = newValue }) }
-        item { IngredientsList(scaledIngredients) }
-        item { InstructionsList(method) }
     }
 }
 
