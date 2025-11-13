@@ -19,7 +19,6 @@ fun IngredientItem(ingredient: IngredientUiModel) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding()
     ) {
         Text(
             text = ingredient.name.uppercase(),

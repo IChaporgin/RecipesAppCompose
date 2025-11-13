@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -135,10 +136,9 @@ fun IngredientsList(ingredients: List<IngredientUiModel>) {
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 12.dp),
     ) {
-        ingredients.forEachIndexed { index, ingredient ->
-            IngredientItem(ingredient)
-
-            if (index < ingredients.lastIndex) {
+        LazyColumn {
+            items(ingredients, key = { it.name }) { ingredient ->
+                IngredientItem(ingredient)
                 HorizontalDivider(
                     color = TextSecondaryColor.copy(alpha = 0.2f),
                     thickness = 0.5.dp,
