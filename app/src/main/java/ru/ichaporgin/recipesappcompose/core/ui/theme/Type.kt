@@ -58,5 +58,15 @@ val recipesAppTypography = Typography(
         fontFamily = montserratFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
+    ),
+    labelSmall = TextStyle(
+        fontFamily = montserratFontFamily,
+        fontWeight = FontWeight.Thin,
+        fontSize = 14.sp,
+    ),
+    titleSmall = TextStyle(
+        fontFamily = montserratFontFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 14.sp
     )
 )

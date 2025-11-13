@@ -44,6 +44,7 @@ private val RecipesAppLightColorScheme = lightColorScheme(
     onBackground = TextPrimaryColor,
     surface = SurfaceColor,
     onSurface = TextSecondaryColor,
+    scrim = SliderTrackColor,
 )
 
 private val RecipesAppDarkColorScheme = darkColorScheme(
@@ -57,6 +58,7 @@ private val RecipesAppDarkColorScheme = darkColorScheme(
     onBackground = TextPrimaryColor,
     surface = SurfaceColorDark,
     onSurface = TextSecondaryColorDark,
+    scrim = SliderTrackColorDark,
 )
 
 @Composable
