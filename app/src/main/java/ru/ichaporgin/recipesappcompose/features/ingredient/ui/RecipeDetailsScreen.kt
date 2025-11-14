@@ -6,8 +6,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
@@ -18,6 +22,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,6 +36,7 @@ import ru.ichaporgin.recipesappcompose.core.ui.theme.AccentBlue
 import ru.ichaporgin.recipesappcompose.core.ui.theme.SliderTrackColor
 import ru.ichaporgin.recipesappcompose.core.ui.theme.TextSecondaryColor
 import ru.ichaporgin.recipesappcompose.core.ui.theme.recipesAppTypography
+import ru.ichaporgin.recipesappcompose.core.ui.utils.ShareUtils
 import kotlin.math.roundToInt
 
 
@@ -40,6 +46,7 @@ fun RecipeDetailScreen(
 ) {
 
     var isLoading by remember { mutableStateOf(false) }
+    val context = LocalContext.current
     val defaultImageRes = R.drawable.img_placeholder
     var recipeTitle by remember { mutableStateOf("") }
     var recipeImage by remember { mutableStateOf<String?>(null) }
@@ -78,7 +85,16 @@ fun RecipeDetailScreen(
         )
     } else {
         LazyColumn {
-            item { ScreenHeader(recipeTitle.uppercase(), recipeImage, defaultImageRes) }
+            item {
+                ScreenHeader(recipeTitle.uppercase(), recipeImage, defaultImageRes)
+                ShareIconButton(onClick = {
+                    ShareUtils.shareRecipe(
+                        context = context,
+                        recipeId = recipe.id.toString(),
+                        recipeTitle = recipe.title
+                    )
+                })
+            }
             item { PortionsSlider(currentPortions, { newValue -> currentPortions = newValue }) }
             item { IngredientsList(scaledIngredients) }
             item { InstructionsList(method) }
@@ -178,6 +194,21 @@ fun InstructionsList(method: List<String>) {
             }
         }
 
+    }
+}
+
+@Composable
+fun ShareIconButton(onClick: () -> Unit) {
+    IconButton(
+        onClick = onClick,
+        modifier = Modifier
+            .padding(8.dp)
+    ) {
+        Icon(
+            imageVector = Icons.Default.Share,
+            contentDescription = stringResource(R.string.share_recipe),
+            tint = MaterialTheme.colorScheme.onPrimaryContainer
+        )
     }
 }
 
