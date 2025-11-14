@@ -6,6 +6,8 @@
     <string name="category_item_title">Бургеры</string>
     <string name="ingredient_item_title">Ингредиенты</string>
     <string name="method_item_title">Способ приготовления</string>
+    <string name="share_recipe">Поделиться рецептом</string>
+
     <plurals name='portions_count'>
         <item quantity='one'>%d порция</item>
         <item quantity='few'>%d порции</item>

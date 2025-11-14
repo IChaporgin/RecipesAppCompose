@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
 import ru.ichaporgin.recipesappcompose.Constants
 import ru.ichaporgin.recipesappcompose.core.ui.model.RecipeUiModel
 import ru.ichaporgin.recipesappcompose.core.ui.navigation.Destination
@@ -40,6 +41,7 @@ fun RecipesApp() {
                     startDestination = Destination.Category.route
                 ) {
                     composable(Destination.Favorite.route) { FavoriteScreen() }
+
                     composable(Destination.Category.route) {
                         CategoriesScreen(
                             onCategoryClick = { categoryId ->
@@ -49,17 +51,27 @@ fun RecipesApp() {
                             }
                         )
                     }
+
                     composable(
                         Destination.Recipes.route,
                         arguments = listOf(navArgument("categoryId") { type = NavType.IntType }),
+                        deepLinks = listOf(
+                            navDeepLink { uriPattern = "recipeapp://category/{categoryId}" },
+                            navDeepLink { uriPattern = "https://recipes.androidspint.ru/category/{categoryId}" },
+                        )
                     )
                     { backStackEntry ->
                         val categoryId = backStackEntry.arguments?.getInt("categoryId") ?: 0
                         RecipesScreen(categoryId, navController)
                     }
+
                     composable(
                         Destination.RecipeDetails.route,
-                        arguments = listOf(navArgument("recipeId") { type = NavType.IntType })
+                        arguments = listOf(navArgument("recipeId") { type = NavType.IntType }),
+                        deepLinks = listOf(
+                            navDeepLink { uriPattern = "recipeapp://recipe/{recipeId}" },
+                            navDeepLink { uriPattern = "https://recipes.androidspint.ru/recipe/{recipeId}" },
+                        ),
                     ) {
                         val recipe = navController.previousBackStackEntry
                             ?.savedStateHandle
